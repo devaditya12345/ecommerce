@@ -1,0 +1,33 @@
+{% extends 'store/base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Register</h4>
+                </div>
+                <div class="card-body">
+                    {% if not request.user.is_authenticated%}
+                    <div style="margin-top:30px">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div>
+                                <!-- <input type="text" name="email" placeholder="username"> -->
+                                Email: <input type="email" name="email">
+                            </div>
+                            <br>
+                            {{form.as_p}}
+                            <button type="submit" class="btn btn-primary">Register</button>
+                        </form>
+                        <p>Already have account.Please<a href="{% url 'login' %}"> Login</a></p>
+                    </div>
+                    {% else %}
+                    <p>You're already logged in and cannot register.Would you like to <a href="/logout">logout</a>?</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
